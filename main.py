@@ -11,7 +11,15 @@ print("Script must run as root")
 threads = int(input("Threads: "))
 
 def generateRandomMac():
-    return str(random.randint(0,9)) + str(random.randint(0,9)) + ":" + str(random.randint(0,9)) + str(random.randint(0,9)) + ":" + str(random.randint(0,9)) + str(random.randint(0,9)) + ":" + str(random.randint(0,9)) + str(random.randint(0,9)) + ":" + str(random.randint(0,9)) + str(random.randint(0,9)) + ":" + str(random.randint(0,9)) + str(random.randint(0,9))
+    mac = ""
+    for i in range (0, 6):
+        digit = hex(random.randint(0,255))      # generating a hexadecimal value 
+        digit = digit[2:]                       # removing the "0x" at the start
+        if len(digit) == 1:                     # if the value hase only one digit
+            digit = "0" + digit                 # make it two
+        mac = mac + digit +":"                  # separate the values
+    return mac[:-1]
+
 
 def sendPacket(sourceMac, destinationMac):
     global packetCount
